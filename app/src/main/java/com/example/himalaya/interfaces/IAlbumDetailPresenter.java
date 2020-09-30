@@ -1,6 +1,8 @@
 package com.example.himalaya.interfaces;
 
-public interface IAlbumDetailPresenter {
+import com.example.himalaya.base.IBasePresenter;
+
+public interface IAlbumDetailPresenter extends IBasePresenter<IAlbumDetailViewCallback > {
     /**
      * 下拉加载更多内容
      */
@@ -18,16 +20,5 @@ public interface IAlbumDetailPresenter {
      */
     void getAlbumDetail(int albumId, int page);
 
-    /**
-     * 通知ui注册的接口
-     * @param detailViewCallback
-     */
-    void registerViewCallback(IAlbumDetailViewCallback detailViewCallback);
-
-    /**
-     * 删除UI通知接口
-     * @param detailViewCallback
-     */
-    void unRegisterViewCallback(IAlbumDetailViewCallback detailViewCallback);
 
 }

@@ -1,6 +1,7 @@
 package com.example.himalaya;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import com.example.himalaya.base.BaseActivity;
 import com.example.himalaya.interfaces.IAlbumDetailViewCallback;
 import com.example.himalaya.presenter.AlbumDetailPresenter;
 ;
+import com.example.himalaya.view.PlayerActivity;
 import com.example.himalaya.view.RoundRectImageView;
 import com.example.himalaya.view.UILoader;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
@@ -35,7 +37,7 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
 
 import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
-public class DetailActivity extends BaseActivity implements IAlbumDetailViewCallback, UILoader.OnRetryClickListener {
+public class DetailActivity extends BaseActivity implements IAlbumDetailViewCallback, UILoader.OnRetryClickListener, DetailListAdapter.ItemClickListener {
 
     private ImageView mLargeCover;
     private RoundRectImageView mSmallCover;
@@ -99,6 +101,7 @@ public class DetailActivity extends BaseActivity implements IAlbumDetailViewCall
                 outRect.right = UIUtil.dip2px(view.getContext(), 2);
             }
         });
+        mDetailListAdapter.setItemClickListener(this);
         return detailListView;
     }
 
@@ -158,5 +161,10 @@ public class DetailActivity extends BaseActivity implements IAlbumDetailViewCall
         if (mAlbumDetailPresenter != null) {
             mAlbumDetailPresenter.getAlbumDetail((int) mCurrentId, mCurrentpage);
         }
+    }
+
+    @Override
+    public void onItemClick() {
+        startActivity(new Intent(this, PlayerActivity.class));
     }
 }
